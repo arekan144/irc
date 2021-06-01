@@ -7,10 +7,12 @@ export default class SendData {
         if (url) {
             this.url = url;
         }
+        // this.address = "http://localhost:4000/"
+        this.address = "https://irc-arkadiusz-sala.herokuapp.com/"
         this.sendIt();
     }
     sendIt = () => {
-        fetch("http://localhost:4000/" + this.url, {
+        fetch(this.address + this.url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
