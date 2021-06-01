@@ -8,8 +8,8 @@ import SendData from "./senddata.js";
 export default class MainICS {
     constructor(msBrd, wrtA) {
         // this.address = "http://localhost:4000/"
-        // this.address = "https://irc-arkadiusz-sala.herokuapp.com/"
-        this.address = "sala-arkadiusz-irc.netlify.app"
+        this.address = "https://irc-arkadiusz-sala.herokuapp.com/"
+        // this.address = "sala-arkadiusz-irc.netlify.app"
         while (this.name == undefined || this.name.length < 1)
             this.name = prompt("Podaj nick!:");
         window.onbeforeunload = () => {

@@ -21,7 +21,8 @@ export default class LongPoolAwait {
             await this.init();
         }
         else if (this.response.status != 200) {
-            this.errorMess()
+            // this.errorMess()
+            await this.init();
         } else {
             let data = await this.response.json();
             console.log(data)
