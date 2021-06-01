@@ -8,7 +8,8 @@ export default class SendData {
             this.url = url;
         }
         // this.address = "http://localhost:4000/"
-        this.address = "https://irc-arkadiusz-sala.herokuapp.com/"
+        // this.address = "https://irc-arkadiusz-sala.herokuapp.com/"
+        this.address = "sala-arkadiusz-irc.netlify.app"
         this.sendIt();
     }
     sendIt = () => {
