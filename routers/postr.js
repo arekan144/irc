@@ -4,6 +4,8 @@ const EventEmitter = require('events');
 const express = require('express');
 const path = require('path');
 
+process.setMaxListeners(0);
+
 var router = express.Router();
 
 let czekacz = new EventEmitter();

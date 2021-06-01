@@ -4,8 +4,6 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
-process.setMaxListeners(0);
-
 const PORT = process.env.PORT || 4000;
 
 const getr = require("./routers/getr.js");
