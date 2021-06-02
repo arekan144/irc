@@ -48,6 +48,10 @@ router.post('/', function (req, res) {
     res.send();
 })
 
+router.post("/stayalive", function (req, res) {
+    res.send("OK")
+})
+
 router.post('/message', async function (req, res) {
     czekacz.once('mess', () => {
         // res.set({ 'Content-Type': 'plane/text' });
@@ -70,29 +74,8 @@ router.post('/message', async function (req, res) {
         }, 100)
         return true;
     })
-    // data.message = "";
+
 })
-
-
-// router.post('/message', function (req, res) {
-//     res.header({
-//         'Content-Type': 'text/plain',
-//         'Access-Control-Allow-Origin': '*',
-//     })
-//     loopser(res);
-// })
-// let loopser = (res) => {
-//     setTimeout(() => {
-//         if (message != "") {
-//             res.send(message)
-//             message = "";
-//         }
-//         else {
-//             loopser(res)
-//         }
-//     }, 1000);
-// }
-
 
 
 module.exports = router;
