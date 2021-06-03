@@ -11,4 +11,7 @@ export default class SystemFunctions {
 
         return string + "" + w3color("rgb(" + r + "," + g + "," + b + ")").toHexString();
     }
+    static setNewNick = (newNick, oldColor) => {
+        return newNick + "" + oldColor;
+    }
 }

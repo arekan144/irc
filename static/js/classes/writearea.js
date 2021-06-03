@@ -20,15 +20,22 @@ export default class WriteArea {
         this.MAINNODE.style.cssText = "height: 80%;padding-left:1%;margin-top:0.1%;display:inline-block;overflow-y:auto;width:92%;margin-right:1%";
         this.BUTTON.BUTTON.onclick = this.handleEnter;
         this.PARENTNODE.insertBefore(this.MAINNODE, this.BUTTON.BUTTON);
+        // this.maxOut = false;
         // this.ERRNODE
     }
     handleEnter = () => {
-        let checked = this.checkIt(this.MAINNODE.innerText)
-        if (!checked)
-            new SendData(udata.nick, this.MAINNODE.innerText);
-        // else new SendData(false,) jeżeli chcesz żeby serwer wiedział o zmianie, inaczej po prostu 
-        // użytkownicy będą wiedzieli o zmianie i zmienili ją dynamicznie, nie trzeba w tym projekcie chyba
-        this.MAINNODE.innerText = "";
+
+        if (!udata.koniec) {
+            let checked = this.checkIt(this.MAINNODE.innerText)
+            if (!checked)
+                new SendData(udata.nick, this.MAINNODE.innerText);
+            // else new SendData(false,) jeżeli chcesz żeby serwer wiedział o zmianie, inaczej po prostu 
+            // użytkownicy będą wiedzieli o zmianie i zmienili ją dynamicznie, nie trzeba w tym projekcie chyba
+            this.MAINNODE.innerText = "";
+        } else {
+            udata.board.createSysMessage("@out")
+            this.MAINNODE.innerText = "";
+        }
     }
     checkIt = (string) => {
 
@@ -36,30 +43,21 @@ export default class WriteArea {
         switch (string[0]) {
             case "/":
                 // if (string.substr(1).split(" ")[0] == color)
-                switch (string.substr(1).split(" ")[0]) {
-                    case "color":
+                // console.log(string.substr(1).split(" "))
+                switch (string.substr(1).split(" ")[0].trim()) {
+                    case "color": case "c":
                         let help = false;
-                        // console.log(string.substr(1).split(" ")[2])
-                        if (string.substr(1).split(" ")[1] != undefined) {
+                        // console.log(string.substr(1).split(" "))
+                        if (string.substr(1).split(" ")[1] != undefined && string.substr(1).split(" ")[1] != "") {
                             switch (string.substr(1).split(" ")[1].toLowerCase()) {
                                 case "random": udata.nick = SystemFunctions.randomColor(udata.nick.split("")[0]);
                                     break;
-                                case "?": case "help": case "h": help = true;
+                                case "?": case "help": help = true;
                                     break;
                                 default: udata.nick = SystemFunctions.setColor(string.substr(1).split(" ")[1], udata.nick.split("")[0]);
                                     break;
 
                             }
-
-
-
-                            // if (string.substr(1).split(" ")[1].toLowerCase() == "random") {
-                            //     udata.nick = SystemFunctions.randomColor(udata.nick.split("")[0])
-                            // }
-
-                            // else if (string.substr(1).split(" ")[1] != undefined) {
-                            //     udata.nick = SystemFunctions.setColor(string.substr(1).split(" ")[1], udata.nick.split("")[0]);
-                            // }
                         }
                         else {
                             udata.nick = SystemFunctions.randomColor(udata.nick.split("")[0])
@@ -70,9 +68,25 @@ export default class WriteArea {
                         else
                             udata.board.createSysMessage("@help@color")
                         break;
-                    case "quit":
+                    case "quit": case "exit":
                         udata.koniec = true;
                         new SendData(false, udata.nick + "@exit");
+                        break;
+                    case "help": case "?":
+                        if (string.substr(1).split(" ")[1] != undefined) {
+                            udata.board.createSysMessage("@help@" + string.substr(1).split(" ")[1])
+                        } else {
+                            udata.board.createSysMessage("@help@")
+                        }
+                        break;
+                    case "nick": case "n":
+                        if (string.substr(1).split(" ")[1] != undefined && string.substr(1).split(" ")[1].length > 1 && !string.substr(1).split(" ")[1].includes("@")) {
+                            new SendData(false, udata.nick.split("")[0] + "@Enick@" + string.substr(1).split(" ")[1])
+                            udata.nick = SystemFunctions.setNewNick(string.substr(1).split(" ")[1], udata.nick.split("")[1])
+                            udata.board.createSysMessage("@nick@true")
+                        } else if (string.substr(1).split(" ")[1] == undefined) {
+                            udata.board.createSysMessage("@nick@" + udata.nick)
+                        }
                         break;
                 }
                 return true;
@@ -95,10 +109,16 @@ export default class WriteArea {
                     if (this.MAINNODE.innerText.length >= this.MAX) {
                         ev.preventDefault();
                         // console.log(/*"EJ! NIE MA MIEJSCA!"*/ this.MAINNODE.offsetTop, this.MAINNODE.offsetHeight)
+                        // if (!this.maxOut) {
+                        //     udata.board.createSysMessage("@limit")
+                        //     this.maxOut = true
+                        //     setTimeout(() => {
+                        //         this.maxOut = false;
+                        //     }, (1000 * 60 * 2))
+                        // }
                     }
 
                 }
-
                 break;
 
         }

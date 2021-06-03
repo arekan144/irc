@@ -40,6 +40,10 @@ export default class LongPoolAwait {
                             case "exit":
                                 udata.board.createSysMessage(data.message[x]);
                                 break;
+                            case "Enick":
+                                udata.board.createSysMessage(data.message[x]);
+                                break;
+
                             default: break;
                         }
                         // console.log("smess")
@@ -50,7 +54,7 @@ export default class LongPoolAwait {
                 }
             if (!udata.koniec)
                 await this.init();
-            else udata.board.createSysMessage("KONIEC");
+            else udata.board.createSysMessage("@out");
         }
     }
     errorMess = () => {

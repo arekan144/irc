@@ -10,7 +10,7 @@ export default class SendData {
         this.sendIt();
     }
     sendIt = () => {
-        fetch(this.url, {
+        fetch("http://localhost:4000/" + this.url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

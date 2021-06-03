@@ -12,8 +12,8 @@ export default class MainICS {
         this.address = "https://irc-arkadiusz-sala.herokuapp.com/"
         // this.address = "sala-arkadiusz-irc.netlify.app"
         let proposedName = "";
-        while (proposedName == undefined || proposedName.length < 1)
-            proposedName = prompt("Podaj nick!:");
+        while (proposedName == undefined || proposedName.length < 1 || proposedName.includes("@"))
+            proposedName = prompt("Podaj nick! (Długość min 2, bez @):");
         udata.nick = SystemFunctions.randomColor(proposedName);
         // this.name =  SystemFunctions.randomColor(proposedName);
         window.onunload = () => {
@@ -28,8 +28,6 @@ export default class MainICS {
         udata.board = this.board;
         this.connection = new LongPoolAwait(this.address + "message", this.board)
         this.textarea = new WriteArea(this.wrtA, udata.nick);
-
-
 
     }
 

@@ -44,7 +44,7 @@ router.post('/', function (req, res) {
         // req.body.message.split()
         // sdata.message;
         switch (req.body.message.split("@")[1]) {
-            case "exit":
+            case "exit": case "Enick":
                 console.log("exit!")
                 data.nick = [...data.nick, false]
                 data.message = [...data.message, req.body.message]
