@@ -30,6 +30,7 @@ body {
 }
 .mscontainer div.name, div.time {
     margin-right: 0.5vw;
+    vertical-align: top;
 }
 .writeArea {
     margin-top: 1vh;

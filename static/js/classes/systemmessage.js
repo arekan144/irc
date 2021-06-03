@@ -17,7 +17,7 @@ export default class SystemMessage extends MessageElement {
                 this.messageNode.innerHTML = "Witam na moim IRC. Dostepne komendy to: /color, TODO()"
                 break;
             case "help":
-                this.messageNode.innerHTML = "Komenda do ustawiania koloru nicku (zmiany pojawią się po w następnych wiadomościach).<br/>Sposób wywołania: /color [puste(==random)|random|color|help].<br> color -> np. 'czerwony', 'rgb(24,200,10)', '#00ff00'.<br>help -> wyświetla tą wiadomość. :)"
+                this.messageNode.innerHTML = "Komenda do ustawiania koloru nicku (zmiany pojawią się w następnych wiadomościach).<br/>Sposób wywołania: /color [puste(==random)|random|color|help].<br> color -> np. 'czerwony', 'rgb(24,200,10)', '#00ff00'.<br>help -> wyświetla tą wiadomość. :)"
                 break;
             default:
                 this.messageNode.innerText = "TODO: " + this.message;
