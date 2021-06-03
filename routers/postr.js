@@ -4,7 +4,7 @@ const EventEmitter = require('events');
 const express = require('express');
 const path = require('path');
 
-process.setMaxListeners(0);
+process.setMaxListeners(10000);
 
 var router = express.Router();
 
@@ -35,14 +35,24 @@ let sdata = {
 
 router.post('/', function (req, res) {
     // console.log("przychodzi! message", req.body);
+    console.log(req.body)
     if (req.body.nick) {
         data.nick = [...data.nick, req.body.nick]
         data.message = [...data.message, req.body.message]
         czekacz.emit('mess');
     } else {
-        req.body.message.split()
-        sdata.message;
+        // req.body.message.split()
+        // sdata.message;
+        switch (req.body.message.split("@")[1]) {
+            case "exit":
+                console.log("exit!")
+                data.nick = [...data.nick, false]
+                data.message = [...data.message, req.body.message]
+                czekacz.emit("mess");
+                break;
+            default: break;
 
+        }
     }
     // console.log(data.message, req.body.nick)
     res.send();
@@ -50,6 +60,10 @@ router.post('/', function (req, res) {
 
 router.post("/stayalive", function (req, res) {
     res.send("OK")
+})
+
+router.post('/test', function () {
+    console.log("test")
 })
 
 router.post('/message', async function (req, res) {
@@ -64,16 +78,16 @@ router.post('/message', async function (req, res) {
         }, 100)
         return true;
     })
-    czekacz.once('smess', () => {
-        res.send(JSON.stringify(sdata))
-        setTimeout(() => {
-            sdata = {
-                nick: false,
-                message: "",
-            }
-        }, 100)
-        return true;
-    })
+    // czekacz.once('smess', () => {
+    //     res.send(JSON.stringify(sdata))
+    //     setTimeout(() => {
+    //         sdata = {
+    //             nick: false,
+    //             message: "",
+    //         }
+    //     }, 100)
+    //     return true;
+    // })
 
 })
 

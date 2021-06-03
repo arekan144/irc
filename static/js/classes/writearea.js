@@ -2,10 +2,11 @@
 
 import SendButton from "./sendbutton.js";
 import SendData from "./senddata.js";
+import SystemFunctions from "./systemfunctions.js";
+import udata from "./userdata.js";
 export default class WriteArea {
-    constructor(parentnode, nick) {
+    constructor(parentnode) {
         this.PARENTNODE = parentnode;
-        this.nick = nick;
         this.MAX = 255
         this.BUTTON = new SendButton(parentnode);
         this.MAINNODE = document.createElement("div");
@@ -22,8 +23,62 @@ export default class WriteArea {
         // this.ERRNODE
     }
     handleEnter = () => {
-        new SendData(this.nick, this.MAINNODE.innerText);
+        let checked = this.checkIt(this.MAINNODE.innerText)
+        if (!checked)
+            new SendData(udata.nick, this.MAINNODE.innerText);
+        // else new SendData(false,) jeżeli chcesz żeby serwer wiedział o zmianie, inaczej po prostu 
+        // użytkownicy będą wiedzieli o zmianie i zmienili ją dynamicznie, nie trzeba w tym projekcie chyba
         this.MAINNODE.innerText = "";
+    }
+    checkIt = (string) => {
+
+
+        switch (string[0]) {
+            case "/":
+                // if (string.substr(1).split(" ")[0] == color)
+                switch (string.substr(1).split(" ")[0]) {
+                    case "color":
+                        let help = false;
+                        // console.log(string.substr(1).split(" ")[2])
+                        if (string.substr(1).split(" ")[1] != undefined) {
+                            switch (string.substr(1).split(" ")[1].toLowerCase()) {
+                                case "random": udata.nick = SystemFunctions.randomColor(udata.nick.split("")[0]);
+                                    break;
+                                case "?": case "help": case "h": help = true;
+                                    break;
+                                default: udata.nick = SystemFunctions.setColor(string.substr(1).split(" ")[1], udata.nick.split("")[0]);
+                                    break;
+
+                            }
+
+
+
+                            // if (string.substr(1).split(" ")[1].toLowerCase() == "random") {
+                            //     udata.nick = SystemFunctions.randomColor(udata.nick.split("")[0])
+                            // }
+
+                            // else if (string.substr(1).split(" ")[1] != undefined) {
+                            //     udata.nick = SystemFunctions.setColor(string.substr(1).split(" ")[1], udata.nick.split("")[0]);
+                            // }
+                        }
+                        else {
+                            udata.nick = SystemFunctions.randomColor(udata.nick.split("")[0])
+                            // console.log("here!")
+                        }
+                        if (!help)
+                            udata.board.createSysMessage("@color@" + udata.nick.split("")[1])
+                        else
+                            udata.board.createSysMessage("@help@color")
+                        break;
+                    case "quit":
+                        udata.koniec = true;
+                        new SendData(false, udata.nick + "@exit");
+                        break;
+                }
+                return true;
+                break;
+            default: return false;
+        }
     }
     handleKeyboard = (ev) => {
         ev.stopPropagation();
@@ -57,4 +112,5 @@ export default class WriteArea {
             this.MAINNODE.focus();
         }
     }
+
 }

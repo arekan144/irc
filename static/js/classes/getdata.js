@@ -1,10 +1,12 @@
 "use strict";
 
+import udata from "./userdata.js"
+
 export default class LongPoolAwait {
     constructor(url, board) {
         this.url = url;
-        this.board = board;
-        this.board.createMessage("Ala", "Mam kota!")
+
+        udata.board.createSysMessage("@hello")
         this.init();
 
     }
@@ -18,29 +20,40 @@ export default class LongPoolAwait {
         });
         // console.log("?")
         if (this.response.status == 502) {
-            await this.init();
+            if (!udata.koniec)
+                await this.init();
         }
         else if (this.response.status != 200) {
             // this.errorMess()
-            await this.init();
+            if (!udata.koniec)
+                await this.init();
         } else {
             let data = await this.response.json();
             console.log(data)
-
-            for (let x = 0; x < data.message.length; x++) {
-                if (data.message[x] && data.nick[x]) {
-                    // console.log("mess+nick")
-                    this.board.createMessage(data.nick[x], data.message[x])
-                } else if (data.message[x]) {
-                    // console.log("smess")
-                } else {
-                    // console.log("exit")
+            if (typeof data === "object")
+                for (let x = 0; x < data.message.length; x++) {
+                    if (data.message[x] && data.nick[x]) {
+                        // console.log("mess+nick")
+                        udata.board.createMessage(data.nick[x], data.message[x]);
+                    } else if (data.message[x]) {
+                        switch (data.message[x].split("@")[1]) {
+                            case "exit":
+                                udata.board.createSysMessage(data.message[x]);
+                                break;
+                            default: break;
+                        }
+                        // console.log("smess")
+                    }
+                    // else {
+                    //     // console.log("exit")
+                    // }
                 }
-            }
-            await this.init();
+            if (!udata.koniec)
+                await this.init();
+            else udata.board.createSysMessage("KONIEC");
         }
     }
     errorMess = () => {
-        console.error("Błąd połączenia!")
+        console.log("Błąd połączenia! - 503");
     }
 }

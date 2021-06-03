@@ -19,8 +19,7 @@ body {
     border-left: 0.5vw solid black;
     border-right: 0.5vw solid black;
     border-radius: 0.5vh;
-    overflow-y: hidden;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 .mscontainer{
     display: block;
@@ -28,7 +27,6 @@ body {
 }
 .mscontainer div {
     display: inline-block;
-    
 }
 .mscontainer div.name, div.time {
     margin-right: 0.5vw;
@@ -48,14 +46,11 @@ body {
     /* justify-content: space-between; */
 }
 
-.writeArea .ss-content {
-    border: 1px solid black;
+.ss-content {
     overflow-y: hidden;
+    word-wrap: break-word;
 }
 
-.writeArea .ss-wrapper {
-    word-wrap: break-word;
-    overflow-x: hidden;
-}
+
 
 
