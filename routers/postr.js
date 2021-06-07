@@ -20,7 +20,7 @@ router.post('/', function (req, res) {
     res.set('Access-Control-Allow-Origin', '*')
     // console.log("przychodzi! message", req.body);
 
-    console.log(req.body)
+    console.log(req.body, "this")
     if (req.body.nick) {
         data.nick = [...data.nick, req.body.nick]
         data.message = [...data.message, req.body.message]
@@ -50,6 +50,7 @@ router.post("/stayalive", function (req, res) {
 
 router.post('/message', async function (req, res) {
     czekacz.once('mess', () => {
+        console.log(data, "es")
         // res.set({ 'Content-Type': 'plane/text' });
         res.set('Access-Control-Allow-Origin', '*')
         res.send(JSON.stringify(data))

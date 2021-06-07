@@ -3,7 +3,7 @@
 export default class SendData {
     constructor(nick, message, url) {
         this.data = { nick: nick, message: message }
-        console.log(this.data)
+        console.log(this.data, url)
         this.url = "/";
         if (url) {
             this.url += url;
