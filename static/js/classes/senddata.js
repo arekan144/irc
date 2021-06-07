@@ -1,8 +1,9 @@
 "use strict";
 
 export default class SendData {
-    constructor(nick, message, url, de) {
+    constructor(nick, message, url) {
         this.data = { nick: nick, message: message }
+        console.log(this.data)
         this.url = "/";
         if (url) {
             this.url += url;

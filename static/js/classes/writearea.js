@@ -29,6 +29,7 @@ export default class WriteArea {
             let checked = this.checkIt(this.MAINNODE.innerText)
             if (!checked)
                 new SendData(udata.nick, this.MAINNODE.innerText);
+            console.log(udata.nick)
             // else new SendData(false,) jeżeli chcesz żeby serwer wiedział o zmianie, inaczej po prostu 
             // użytkownicy będą wiedzieli o zmianie i zmienili ją dynamicznie, nie trzeba w tym projekcie chyba
             this.MAINNODE.innerText = "";
@@ -38,8 +39,6 @@ export default class WriteArea {
         }
     }
     checkIt = (string) => {
-
-
         switch (string[0]) {
             case "/":
                 // if (string.substr(1).split(" ")[0] == color)
