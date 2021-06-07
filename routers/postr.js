@@ -72,7 +72,7 @@ router.post('/test', function () {
 router.post('/message', async function (req, res) {
     czekacz.once('mess', () => {
         // res.set({ 'Content-Type': 'plane/text' });
-        res.set('Access-Control-Allow-Origin': '*')
+//         res.set('Access-Control-Allow-Origin': '*')
         res.send(JSON.stringify(data))
         setTimeout(() => {
             data = {
