@@ -7,14 +7,9 @@ export default class SendData {
         if (url) {
             this.url += url;
         }
-<<<<<<< HEAD
-=======
-        this.address = "https://irc-arkadiusz-sala.herokuapp.com/"
-        if(de)
->>>>>>> 3c5710f3cec5e6f35aa333513d37d09f646daf33
         this.sendIt();
         else this.sendIt2();
-            
+
     }
     sendIt = () => {
         fetch(this.url, {
@@ -30,10 +25,10 @@ export default class SendData {
     sendIt2 = () => {
         fetch(this.address + this.url, {
             method: 'POST',
-            
+
             headers: {
                 'Content-Type': 'application/json',
-                
+
             },
             body: JSON.stringify(this.data)
         });
