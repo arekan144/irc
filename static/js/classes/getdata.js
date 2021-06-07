@@ -13,7 +13,7 @@ export default class LongPoolAwait {
     init = async () => {
         this.response = await fetch(this.url, {
             method: 'POST',
-            mode: 'no-cors',
+            
             headers: {
                 'Content-Type': 'application/json'
             },
