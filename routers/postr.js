@@ -34,6 +34,7 @@ let sdata = {
 // data.message += "dit"; to nie
 
 router.post('/', function (req, res) {
+    res.header('Access-Control-Allow-Origin': '*')
     // console.log("przychodzi! message", req.body);
     console.log(req.body)
     if (req.body.nick) {
@@ -59,16 +60,19 @@ router.post('/', function (req, res) {
 })
 
 router.post("/stayalive", function (req, res) {
+    res.header('Access-Control-Allow-Origin': '*')
     res.send("OK")
 })
 
 router.post('/test', function () {
+    res.header('Access-Control-Allow-Origin': '*')
     console.log("test")
 })
 
 router.post('/message', async function (req, res) {
     czekacz.once('mess', () => {
         // res.set({ 'Content-Type': 'plane/text' });
+        res.header('Access-Control-Allow-Origin': '*')
         res.send(JSON.stringify(data))
         setTimeout(() => {
             data = {
