@@ -15,7 +15,7 @@ export default class MainICS {
         // this.name =  SystemFunctions.randomColor(proposedName);
         window.onunload = () => {
             if (!udata.koniec)
-                new SendData(false, proposedName + "@exit", true);
+                new SendData(false, proposedName + "@exit");
             // console.log(this.name + "@exit")
         }
         this.msBrd = msBrd;
