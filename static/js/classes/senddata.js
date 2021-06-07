@@ -15,7 +15,8 @@ export default class SendData {
             method: 'POST',
         
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
             body: JSON.stringify(this.data)
         });
