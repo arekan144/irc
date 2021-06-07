@@ -17,6 +17,7 @@ let data = {
 
 
 router.post('/', function (req, res) {
+    res.set('Access-Control-Allow-Origin', '*')
     // console.log("przychodzi! message", req.body);
 
     console.log(req.body)
@@ -43,6 +44,7 @@ router.post('/', function (req, res) {
 })
 
 router.post("/stayalive", function (req, res) {
+<<<<<<< HEAD
     res.set('Access-Control-Allow-Origin', '*')
     res.send("OK")
 })
@@ -51,6 +53,17 @@ router.post('/message', async function (req, res) {
     czekacz.once('mess', () => {
         // res.set({ 'Content-Type': 'plane/text' });
         res.set('Access-Control-Allow-Origin', '*')
+=======
+     res.set('Access-Control-Allow-Origin', '*')
+    res.send("OK")
+})
+
+
+router.post('/message', async function (req, res) {
+    czekacz.once('mess', () => {
+        // res.set({ 'Content-Type': 'plane/text' });
+//         res.set('Access-Control-Allow-Origin': '*')
+>>>>>>> 3c5710f3cec5e6f35aa333513d37d09f646daf33
         res.send(JSON.stringify(data))
         setTimeout(() => {
             data = {

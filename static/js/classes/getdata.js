@@ -14,7 +14,8 @@ export default class LongPoolAwait {
         this.response = await fetch(this.url, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
             body: "{}",
         });
