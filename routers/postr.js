@@ -34,7 +34,7 @@ let sdata = {
 // data.message += "dit"; to nie
 
 router.post('/', function (req, res) {
-    res.set('Access-Control-Allow-Origin': '*')
+//     res.set('Access-Control-Allow-Origin': '*')
     // console.log("przychodzi! message", req.body);
     console.log(req.body)
     if (req.body.nick) {
@@ -64,10 +64,6 @@ router.post("/stayalive", function (req, res) {
     res.send("OK")
 })
 
-router.post('/test', function () {
-    res.set('Access-Control-Allow-Origin': '*')
-    console.log("test")
-})
 
 router.post('/message', async function (req, res) {
     czekacz.once('mess', () => {
