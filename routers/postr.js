@@ -34,7 +34,7 @@ let sdata = {
 // data.message += "dit"; to nie
 
 router.post('/', function (req, res) {
-//     res.set('Access-Control-Allow-Origin': '*')
+    res.set('Access-Control-Allow-Origin', '*')
     // console.log("przychodzi! message", req.body);
     console.log(req.body)
     if (req.body.nick) {
@@ -60,7 +60,7 @@ router.post('/', function (req, res) {
 })
 
 router.post("/stayalive", function (req, res) {
-//     res.set('Access-Control-Allow-Origin': '*')
+     res.set('Access-Control-Allow-Origin', '*')
     res.send("OK")
 })
 
