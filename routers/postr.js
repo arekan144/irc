@@ -60,7 +60,7 @@ router.post('/', function (req, res) {
 })
 
 router.post("/stayalive", function (req, res) {
-    res.set('Access-Control-Allow-Origin': '*')
+//     res.set('Access-Control-Allow-Origin': '*')
     res.send("OK")
 })
 
