@@ -3,15 +3,14 @@
 export default class SendData {
     constructor(nick, message, url) {
         this.data = { nick: nick, message: message }
-        this.url = "";
+        this.url = "/";
         if (url) {
-            this.url = url;
+            this.url += url;
         }
-        this.address = "https://irc-arkadiusz-sala.herokuapp.com/"
         this.sendIt();
     }
     sendIt = () => {
-        fetch(this.address + this.url, {
+        fetch(this.url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

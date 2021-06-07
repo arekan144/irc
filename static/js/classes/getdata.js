@@ -4,7 +4,7 @@ import udata from "./userdata.js"
 
 export default class LongPoolAwait {
     constructor(url, board) {
-        this.url = url;
+        this.url = "/" + url;
 
         udata.board.createSysMessage("@hello")
         this.init();

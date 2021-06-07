@@ -14,27 +14,11 @@ let data = {
     nick: [],
     message: [],
 }
-let sdata = {
-    nick: false,
-    message: "",
-}
 
-// let handler = {
-//     set(target, property, value) {
-//         target[property] = value;
-//         console.log(data)
-//         czekacz.emit('mess')
-//         return true;
-//     },
-// };
-
-// let proxyData = new Proxy(data, handler);
-
-// messProxy.message += "dut" + ";"; to wywoła event
-// data.message += "dit"; to nie
 
 router.post('/', function (req, res) {
     // console.log("przychodzi! message", req.body);
+
     console.log(req.body)
     if (req.body.nick) {
         data.nick = [...data.nick, req.body.nick]
@@ -42,10 +26,9 @@ router.post('/', function (req, res) {
         czekacz.emit('mess');
     } else {
         // req.body.message.split()
-        // sdata.message;
         switch (req.body.message.split("@")[1]) {
             case "exit": case "Enick":
-                console.log("exit!")
+                // console.log("exit!")
                 data.nick = [...data.nick, false]
                 data.message = [...data.message, req.body.message]
                 czekacz.emit("mess");
@@ -55,20 +38,19 @@ router.post('/', function (req, res) {
         }
     }
     // console.log(data.message, req.body.nick)
+    res.set('Access-Control-Allow-Origin', '*')
     res.send();
 })
 
 router.post("/stayalive", function (req, res) {
+    res.set('Access-Control-Allow-Origin', '*')
     res.send("OK")
-})
-
-router.post('/test', function () {
-    console.log("test")
 })
 
 router.post('/message', async function (req, res) {
     czekacz.once('mess', () => {
         // res.set({ 'Content-Type': 'plane/text' });
+        res.set('Access-Control-Allow-Origin', '*')
         res.send(JSON.stringify(data))
         setTimeout(() => {
             data = {
@@ -78,17 +60,6 @@ router.post('/message', async function (req, res) {
         }, 100)
         return true;
     })
-    // czekacz.once('smess', () => {
-    //     res.send(JSON.stringify(sdata))
-    //     setTimeout(() => {
-    //         sdata = {
-    //             nick: false,
-    //             message: "",
-    //         }
-    //     }, 100)
-    //     return true;
-    // })
-
 })
 
 
