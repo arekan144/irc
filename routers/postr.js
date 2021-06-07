@@ -50,7 +50,7 @@ router.post("/stayalive", function (req, res) {
 
 router.post('/message', async function (req, res) {
     czekacz.once('mess', () => {
-        console.log(data, "es")
+        // console.log(data, "es")
         // res.set({ 'Content-Type': 'plane/text' });
         res.set('Access-Control-Allow-Origin', '*')
         res.send(JSON.stringify(data))
